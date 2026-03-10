@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --naranja: #F04E23;
+  --naranja-claro: #ff6b42;
+  --fondo: #f0f4f8;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: rgba(31, 38, 135, 0.15);
+  --texto: #2d3748;
+  --texto-claro: #718096;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f5e6e0 0%, #fdf0eb 50%, #e8f4f8 100%);
+  min-height: 100vh;
+  color: var(--texto);
+}
+
+/* Header Glass */
+header {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px var(--glass-shadow);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  color: var(--naranja);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 500;
+  margin-left: 1.5rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--naranja);
+}
+
+/* Main */
+main {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Cards Glass */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--glass-shadow);
+}
+
+.card h2 {
+  color: var(--naranja);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--texto-claro);
+  line-height: 1.6;
+}
+
+/* Botones */
+.btn {
+  background: var(--naranja);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--naranja-claro);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--naranja);
+  border: 1px solid var(--naranja);
+}
+
+.btn-ghost:hover {
+  background: var(--naranja);
+  color: white;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--texto-claro);
+  font-size: 0.9rem;
+  margin-top: 3rem;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  color: var(--texto-claro);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Grid de stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+}
+
+.stat-card .numero {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--naranja);
+}
+
+.stat-card .label {
+  color: var(--texto-claro);
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
