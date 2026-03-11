@@ -64,5 +64,25 @@ const eliminar = async (req, res) => {
     res.status(500).json({ status: 'error', mensaje: err.message });
   }
 };
+const getEditar = async (req, res) => {
+  try {
+    const cita = await Cita.findByPk(req.params.id, { raw: true });
+    const mascotas = await Mascota.findAll({ include: [{ model: Dueno, as: 'Dueno' }] });
+    res.render('citas/editar', { cita, mascotas: mascotas.map(m => m.toJSON()) });
+  } catch (err) {
+    res.status(500).json({ status: 'error', mensaje: err.message });
+  }
+};
 
-module.exports = { getAll, getNueva, crear, completar, eliminar };
+const actualizar = async (req, res) => {
+  try {
+    const { mascotaId, fechaDia, fechaHora, motivo } = req.body;
+    const fecha = new Date(`${fechaDia}T${fechaHora}`);
+    await Cita.update({ mascotaId, fecha, motivo }, { where: { id: req.params.id } });
+    res.redirect('/citas');
+  } catch (err) {
+    res.status(500).json({ status: 'error', mensaje: err.message });
+  }
+};
+
+module.exports = { getAll, getNueva, crear, completar, eliminar, getEditar, actualizar };

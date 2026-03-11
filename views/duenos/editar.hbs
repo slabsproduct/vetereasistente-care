@@ -1,0 +1,15 @@
+<div class="card">
+  <h2>✏️ Editar dueño</h2>
+  {{#if error}}
+    <p style="color:red; margin-bottom:1rem;">{{error}}</p>
+  {{/if}}
+  <form action="/duenos/{{dueno.id}}/actualizar" method="POST" style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+    <input type="text" name="rut" value="{{dueno.rut}}" placeholder="RUT" required style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="text" name="nombre" value="{{dueno.nombre}}" placeholder="Nombre completo" required style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="email" name="email" value="{{dueno.email}}" placeholder="Email" required style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="text" name="telefono" value="{{dueno.telefono}}" placeholder="Teléfono" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="text" name="direccion" value="{{dueno.direccion}}" placeholder="Dirección" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <button type="submit" class="btn">Guardar cambios</button>
+    <a href="/registro" class="btn btn-ghost">Cancelar</a>
+  </form>
+</div>

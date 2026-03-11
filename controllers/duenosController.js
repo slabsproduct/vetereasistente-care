@@ -67,5 +67,31 @@ const eliminar = async (req, res) => {
     res.status(500).json({ status: 'error', mensaje: err.message });
   }
 };
+const getEditar = async (req, res) => {
+  try {
+    const dueno = await Dueno.findByPk(req.params.id, { raw: true });
+    res.render('duenos/editar', { dueno });
+  } catch (err) {
+    res.status(500).json({ status: 'error', mensaje: err.message });
+  }
+};
 
-module.exports = { getAll, getNuevo, crear, getDetalle, eliminar };
+const actualizar = async (req, res) => {
+  try {
+    await Dueno.update(req.body, { where: { id: req.params.id } });
+    res.redirect('/registro');
+  } catch (err) {
+    let mensaje = 'Error al actualizar 😕';
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      const campo = err.errors?.[0]?.path || '';
+      const mensajes = {
+        email: '📧 Ya existe un dueño con ese email',
+        rut: '🪪 Ya existe un dueño con ese RUT',
+      };
+      mensaje = mensajes[campo] || '⚠️ Ya existe un registro con esos datos';
+    }
+    const dueno = await Dueno.findByPk(req.params.id, { raw: true });
+    res.render('duenos/editar', { dueno, error: mensaje });
+  }
+};
+module.exports = { getAll, getNuevo, crear, getDetalle, eliminar, getEditar, actualizar };

@@ -28,5 +28,23 @@ const getNueva = async (req, res) => {
     res.status(500).json({ status: 'error', mensaje: err.message });
   }
 };
+const getEditar = async (req, res) => {
+  try {
+    const mascota = await Mascota.findByPk(req.params.id, { raw: true });
+    res.render('mascotas/editar', { mascota });
+  } catch (err) {
+    res.status(500).json({ status: 'error', mensaje: err.message });
+  }
+};
 
-module.exports = { crear, eliminar, getNueva };
+const actualizar = async (req, res) => {
+  try {
+    const mascota = await Mascota.findByPk(req.params.id);
+    await mascota.update(req.body);
+    res.redirect(`/duenos/${mascota.duenoId}`);
+  } catch (err) {
+    const mascota = await Mascota.findByPk(req.params.id, { raw: true });
+    res.render('mascotas/editar', { mascota, error: 'Error al actualizar 😕' });
+  }
+};
+module.exports = { crear, eliminar, getNueva, getEditar, actualizar };

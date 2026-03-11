@@ -1,0 +1,19 @@
+<div class="card">
+  <h2>✏️ Editar mascota</h2>
+  {{#if error}}
+    <p style="color:red; margin-bottom:1rem;">{{error}}</p>
+  {{/if}}
+  <form action="/mascotas/{{mascota.id}}/actualizar" method="POST" style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+    <input type="text" name="nombre" value="{{mascota.nombre}}" placeholder="Nombre" required style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <select name="especie" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+      <option value="Perro" {{#if (eq mascota.especie 'Perro')}}selected{{/if}}>🐶 Perro</option>
+      <option value="Gato" {{#if (eq mascota.especie 'Gato')}}selected{{/if}}>🐱 Gato</option>
+      <option value="Ave" {{#if (eq mascota.especie 'Ave')}}selected{{/if}}>🐦 Ave</option>
+      <option value="Otro" {{#if (eq mascota.especie 'Otro')}}selected{{/if}}>🐾 Otro</option>
+    </select>
+    <input type="text" name="raza" value="{{mascota.raza}}" placeholder="Raza" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="number" name="edad" value="{{mascota.edad}}" placeholder="Edad en años" min="0" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <button type="submit" class="btn">Guardar cambios</button>
+    <a href="/duenos/{{mascota.duenoId}}" class="btn btn-ghost">Cancelar</a>
+  </form>
+</div>

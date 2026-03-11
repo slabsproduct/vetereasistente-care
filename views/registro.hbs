@@ -44,8 +44,9 @@
         <p>📧 {{this.email}}</p>
         <p>📞 {{this.telefono}}</p>
         <p>📍 {{this.direccion}}</p>
-        <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+        <div style="display:flex; gap:0.5rem; margin-top:1rem;justify-content:center;">
           <a href="/duenos/{{this.id}}" class="btn">Ver detalle</a>
+          <a href="/duenos/{{this.id}}/editar" class="btn btn-ghost">✏️ Editar</a>
           <form action="/duenos/{{this.id}}/eliminar" method="POST">
             <button type="submit" class="btn btn-ghost">Eliminar</button>
           </form>
@@ -71,8 +72,9 @@
         <p>Edad: {{this.edad}} años</p>
         <p>👤 Dueño: {{this.Dueno.nombre}}</p>
         <p>🪪 RUT: {{this.Dueno.rut}}</p>
-        <div style="margin-top:1rem;">
-          <a href="/duenos/{{this.Dueno.id}}" class="btn">Ver dueño</a>
+        <div style="display:flex; gap:0.5rem; margin-top:1rem; justify-content:center;">
+            <a href="/duenos/{{this.Dueno.id}}" class="btn">Ver dueño</a>
+            <a href="/mascotas/{{this.id}}/editar" class="btn btn-ghost">✏️ Editar</a>
         </div>
       </div>
       {{/each}}
