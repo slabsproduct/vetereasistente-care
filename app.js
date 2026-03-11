@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const { engine } = require('express-handlebars');
+const session = require('express-session');
 const logger = require('./middlewares/logger');
 const { sequelize } = require('./models');
 
@@ -13,39 +14,51 @@ app.engine('hbs', engine({
   helpers: {
     eq: (a, b) => a === b,
     formatFecha: (fecha) => {
-  const d = new Date(fecha);
-  const dia = String(d.getUTCDate()).padStart(2, '0');
-  const mes = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const anio = d.getUTCFullYear();
-  return `${dia}/${mes}/${anio}`;
-},
-formatHora: (fecha) => {
-  const d = new Date(fecha);
-  const hora = String(d.getUTCHours()).padStart(2, '0');
-  const minutos = String(d.getUTCMinutes()).padStart(2, '0');
-  return `${hora}:${minutos}`;
-}
+      const d = new Date(fecha);
+      const dia = String(d.getUTCDate()).padStart(2, '0');
+      const mes = String(d.getUTCMonth() + 1).padStart(2, '0');
+      const anio = d.getUTCFullYear();
+      return `${dia}/${mes}/${anio}`;
+    },
+    formatHora: (fecha) => {
+      const d = new Date(fecha);
+      const hora = String(d.getUTCHours()).padStart(2, '0');
+      const minutos = String(d.getUTCMinutes()).padStart(2, '0');
+      return `${hora}:${minutos}`;
+    }
   }
 }));
+
 app.set('view engine', 'hbs');
 app.set('views', './views');
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 8 * 60 * 60 * 1000 }
+}));
 
 app.use(logger);
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
 const duenosRoutes = require('./routes/duenos');
 const mascotasRoutes = require('./routes/mascotas');
-const registroRoutes = require('./routes/registro');
 const citasRoutes = require('./routes/citas');
-app.use('/citas', citasRoutes);
-app.use('/registro', registroRoutes);
-app.use('/mascotas', mascotasRoutes);
+const registroRoutes = require('./routes/registro');
+const apiRoutes = require('./routes/api/index');
 
+app.use('/', authRoutes);
 app.use('/', indexRoutes);
 app.use('/duenos', duenosRoutes);
+app.use('/mascotas', mascotasRoutes);
+app.use('/citas', citasRoutes);
+app.use('/registro', registroRoutes);
+app.use('/api', apiRoutes);
 
 sequelize.authenticate()
   .then(() => {

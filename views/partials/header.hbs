@@ -1,9 +1,12 @@
 <header>
   <h1>🐾 VeteAsistente Care</h1>
+  {{#unless esLogin}}
   <nav>
     <a href="/">Inicio</a>
     <a href="/registro">📋 Registro</a>
     <a href="/citas">📅 Citas</a>
     <a href="/status">Estado</a>
+    <a href="/logout" style="color:var(--naranja)">🚪 Salir</a>
   </nav>
+  {{/unless}}
 </header>

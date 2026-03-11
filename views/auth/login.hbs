@@ -1,0 +1,23 @@
+<div style="min-height:80vh; display:flex; align-items:center; justify-content:center;">
+  <div class="card" style="width:100%; max-width:400px;">
+    <h2 style="text-align:center; margin-bottom:1.5rem;">🐾 VeteAsistente Care</h2>
+    <p style="text-align:center; color:var(--texto-claro); margin-bottom:2rem;">Inicia sesión para continuar</p>
+
+    {{#if error}}
+      <p style="color:red; text-align:center; margin-bottom:1rem;">{{error}}</p>
+    {{/if}}
+
+    <form action="/login" method="POST" style="display:flex; flex-direction:column; gap:1rem;">
+      <input type="email" name="email" placeholder="📧 Email" required
+        style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+      <input type="password" name="password" placeholder="🔒 Contraseña" required
+        style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+      <button type="submit" class="btn" style="width:100%;">Ingresar</button>
+    </form>
+    <div style="margin-top:1.5rem; padding:1rem; background:rgba(240,78,35,0.08); border-radius:8px; text-align:center;">
+  <p style="font-size:0.55rem; color:var(--texto-claro);">🧪 Credenciales de prueba</p>
+  <p style="font-size:0.55rem;"><strong>Email:</strong> admin@vete.cl</p>
+  <p style="font-size:0.55rem;"><strong>Contraseña:</strong> admin123</p>
+</div>
+  </div>
+</div>
