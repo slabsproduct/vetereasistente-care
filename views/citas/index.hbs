@@ -1,0 +1,36 @@
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2>📅 Citas</h2>
+    <a href="/citas/nueva" class="btn">+ Nueva cita</a>
+  </div>
+</div>
+
+{{#if citas.length}}
+  <div class="stats-grid">
+    {{#each citas}}
+    <div class="stat-card">
+      <h3>🐾 {{this.Mascota.nombre}}</h3>
+      <p>👤 {{this.Mascota.Dueno.nombre}}</p>
+      <p>📅 {{formatFecha this.fecha}} — 🕐 {{formatHora this.fecha}}</p>
+      <p>📋 {{this.motivo}}</p>
+      <p style="color:{{#if (eq this.estado 'pendiente')}}#F04E23{{else}}green{{/if}}; font-weight:600;">
+        {{#if (eq this.estado 'pendiente')}}⏳ Pendiente{{else}}✅ Completada{{/if}}
+      </p>
+      <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+        {{#if (eq this.estado 'pendiente')}}
+        <form action="/citas/{{this.id}}/completar" method="POST">
+          <button type="submit" class="btn">✅ Completar</button>
+        </form>
+        {{/if}}
+        <form action="/citas/{{this.id}}/eliminar" method="POST">
+          <button type="submit" class="btn btn-ghost">Eliminar</button>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="card">
+    <p>No hay citas registradas aún 📅</p>
+  </div>
+{{/if}}

@@ -8,7 +8,25 @@ const { sequelize } = require('./models');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.engine('hbs', engine({ extname: '.hbs' }));
+app.engine('hbs', engine({
+  extname: '.hbs',
+  helpers: {
+    eq: (a, b) => a === b,
+    formatFecha: (fecha) => {
+  const d = new Date(fecha);
+  const dia = String(d.getUTCDate()).padStart(2, '0');
+  const mes = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const anio = d.getUTCFullYear();
+  return `${dia}/${mes}/${anio}`;
+},
+formatHora: (fecha) => {
+  const d = new Date(fecha);
+  const hora = String(d.getUTCHours()).padStart(2, '0');
+  const minutos = String(d.getUTCMinutes()).padStart(2, '0');
+  return `${hora}:${minutos}`;
+}
+  }
+}));
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
@@ -21,6 +39,8 @@ const indexRoutes = require('./routes/index');
 const duenosRoutes = require('./routes/duenos');
 const mascotasRoutes = require('./routes/mascotas');
 const registroRoutes = require('./routes/registro');
+const citasRoutes = require('./routes/citas');
+app.use('/citas', citasRoutes);
 app.use('/registro', registroRoutes);
 app.use('/mascotas', mascotasRoutes);
 
