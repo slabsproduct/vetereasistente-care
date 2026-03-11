@@ -1,0 +1,26 @@
+<div class="card">
+  <h2>👥 Dueños registrados</h2>
+  <a href="/duenos/nuevo" class="btn">+ Nuevo dueño</a>
+</div>
+
+{{#if duenos.length}}
+  <div class="stats-grid">
+    {{#each duenos}}
+    <div class="stat-card">
+      <h3>{{this.nombre}}</h3>
+      <p>📧 {{this.email}}</p>
+      <p>📞 {{this.telefono}}</p>
+      <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+        <a href="/duenos/{{this.id}}" class="btn">Ver detalle</a>
+        <form action="/duenos/{{this.id}}/eliminar" method="POST">
+          <button type="submit" class="btn btn-ghost">Eliminar</button>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="card">
+    <p>No hay dueños registrados aún 🐾</p>
+  </div>
+{{/if}}

@@ -1,0 +1,85 @@
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <h2>📋 Registro</h2>
+    <a href="/duenos/nuevo" class="btn">+ Nuevo dueño y mascota</a>
+  </div>
+
+  <form action="/registro" method="GET" style="display:flex; gap:1rem; margin-top:1rem;">
+    <input type="hidden" name="tab" value="{{#if tabMascotas}}mascotas{{else}}duenos{{/if}}">
+    <input 
+      type="text" 
+      name="busqueda" 
+      placeholder="🔍 Buscar por nombre o RUT..." 
+      value="{{busqueda}}"
+      style="padding:0.7rem; border-radius:8px; border:1px solid #ddd; flex:1;">
+    <button type="submit" class="btn">Buscar</button>
+    {{#if busqueda}}
+      <a href="/registro" class="btn btn-ghost">Limpiar</a>
+    {{/if}}
+  </form>
+</div>
+
+<!-- Tabs -->
+<div style="display:flex; gap:1rem; margin-bottom:1rem;">
+  <a href="/registro?tab=duenos&busqueda={{busqueda}}" 
+     class="btn {{#unless tabMascotas}}active{{/unless}}"
+     style="{{#unless tabMascotas}}background:var(--naranja){{else}}background:transparent; color:var(--naranja); border:1px solid var(--naranja){{/unless}}">
+    👥 Dueños ({{duenos.length}})
+  </a>
+  <a href="/registro?tab=mascotas&busqueda={{busqueda}}" 
+     class="btn"
+     style="{{#if tabMascotas}}background:var(--naranja){{else}}background:transparent; color:var(--naranja); border:1px solid var(--naranja){{/if}}">
+    🐾 Mascotas ({{mascotas.length}})
+  </a>
+</div>
+
+<!-- Tab Dueños -->
+{{#unless tabMascotas}}
+  {{#if duenos.length}}
+    <div class="stats-grid">
+      {{#each duenos}}
+      <div class="stat-card">
+        <h3>{{this.nombre}}</h3>
+        <p>🪪 {{this.rut}}</p>
+        <p>📧 {{this.email}}</p>
+        <p>📞 {{this.telefono}}</p>
+        <p>📍 {{this.direccion}}</p>
+        <div style="display:flex; gap:0.5rem; margin-top:1rem;">
+          <a href="/duenos/{{this.id}}" class="btn">Ver detalle</a>
+          <form action="/duenos/{{this.id}}/eliminar" method="POST">
+            <button type="submit" class="btn btn-ghost">Eliminar</button>
+          </form>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="card">
+      <p>No se encontraron dueños 👥</p>
+    </div>
+  {{/if}}
+{{/unless}}
+
+<!-- Tab Mascotas -->
+{{#if tabMascotas}}
+  {{#if mascotas.length}}
+    <div class="stats-grid">
+      {{#each mascotas}}
+      <div class="stat-card">
+        <h3>{{this.nombre}}</h3>
+        <p>{{this.especie}} - {{this.raza}}</p>
+        <p>Edad: {{this.edad}} años</p>
+        <p>👤 Dueño: {{this.Dueno.nombre}}</p>
+        <p>🪪 RUT: {{this.Dueno.rut}}</p>
+        <div style="margin-top:1rem;">
+          <a href="/duenos/{{this.Dueno.id}}" class="btn">Ver dueño</a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="card">
+      <p>No se encontraron mascotas 🐾</p>
+    </div>
+  {{/if}}
+{{/if}}

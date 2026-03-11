@@ -1,0 +1,28 @@
+<div class="card">
+  <h2>👤 {{dueno.nombre}}</h2>
+  <p>🪪 {{dueno.rut}}</p>
+  <p>📧 {{dueno.email}}</p>
+  <p>📞 {{dueno.telefono}}</p>
+  <p>📍 {{dueno.direccion}}</p>
+  <a href="/duenos" class="btn btn-ghost" style="margin-top:1rem;">← Volver</a>
+</div>
+
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+  <h2>🐾 Mascotas</h2>
+  <a href="/mascotas/nueva/{{dueno.id}}" class="btn">+ Nueva mascota</a>
+</div>
+  {{#if dueno.Mascotas.length}}
+    <div class="stats-grid">
+      {{#each dueno.Mascotas}}
+      <div class="stat-card">
+        <h3>{{this.nombre}}</h3>
+        <p>{{this.especie}} - {{this.raza}}</p>
+        <p>Edad: {{this.edad}} años</p>
+      </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p>Sin mascotas registradas aún</p>
+  {{/if}}
+</div>

@@ -1,0 +1,18 @@
+<div class="card">
+  <h2>🐾 Nueva mascota de {{dueno.nombre}}</h2>
+  <form action="/mascotas" method="POST" style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+    <input type="hidden" name="duenoId" value="{{dueno.id}}">
+    <input type="text" name="nombre" placeholder="Nombre de la mascota" required style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <select name="especie" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+      <option value="">Selecciona especie</option>
+      <option value="Perro">🐶 Perro</option>
+      <option value="Gato">🐱 Gato</option>
+      <option value="Ave">🐦 Ave</option>
+      <option value="Otro">🐾 Otro</option>
+    </select>
+    <input type="text" name="raza" placeholder="Raza" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <input type="number" name="edad" placeholder="Edad en años" min="0" style="padding:0.7rem; border-radius:8px; border:1px solid #ddd;">
+    <button type="submit" class="btn">Guardar</button>
+    <a href="/duenos/{{dueno.id}}" class="btn btn-ghost">Cancelar</a>
+  </form>
+</div>
