@@ -14,6 +14,10 @@ const Veterinario = sequelize.define('Veterinario', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  rol: {
+    type: DataTypes.ENUM('admin', 'viewer'),
+    defaultValue: 'admin'
   }
 });
 

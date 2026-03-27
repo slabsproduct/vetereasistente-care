@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const verificarToken = (req, res, next) => {
-  const token = req.session?.token;
+   const tokenSesion = req.session?.token;
+  const tokenHeader = req.headers['authorization']?.split(' ')[1];
+  const token = tokenSesion || tokenHeader;
 
   if (!token) return res.redirect('/login');
 
