@@ -4,5 +4,6 @@ const router = express.Router();
 router.use('/duenos', require('./duenos'));
 router.use('/mascotas', require('./mascotas'));
 router.use('/citas', require('./citas'));
+router.use('/usuarios', require('./usuarios'));
 
 module.exports = router;
