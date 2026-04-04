@@ -8,7 +8,17 @@ const Mascota = sequelize.define('Mascota', {
   },
   especie: DataTypes.STRING,
   raza: DataTypes.STRING,
-  edad: DataTypes.INTEGER
+  edad: DataTypes.INTEGER,
+  // foto de perfil de la mascota
+  foto: {
+    type: DataTypes.STRING,
+    defaultValue: null
+  },
+  // carnet de vacunación
+  carnetVacunacion: {
+    type: DataTypes.STRING,
+    defaultValue: null
+  }
 });
 
 module.exports = Mascota;
