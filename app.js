@@ -41,6 +41,7 @@ app.use(session({
 
 app.use(logger);
 app.use(express.static('public'));
+app.use('/img-doc-app', express.static('views/img-doc-app'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
